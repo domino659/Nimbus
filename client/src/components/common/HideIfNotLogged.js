@@ -1,9 +1,9 @@
-import { useAppSelector } from '../../hooks/reduxHooks';
+import { useSelector } from 'react-redux';
 
 export default function HideIfNotLogged({ children }) {
-  const token = useAppSelector((state) => state.userConnected.token);
+  const user = useSelector((state) => state.user);
 
-  if (!token) {
+  if (!user.token) {
     return <></>;
   }
   return children;

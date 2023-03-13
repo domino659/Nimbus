@@ -2,12 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   id: '',
-  mail: 'lala',
+  mail: '',
   password: '',
   token: '',
   errorMessage: '',
-  lala: '',
-  value: 0,
 };
 
 const userSlice = createSlice({
@@ -17,8 +15,14 @@ const userSlice = createSlice({
     increment: (state) => {
       state.value += 1;
     },
+    login: (state) => {
+      state.token = 'coucou';
+    },
+    disconnect: (state) => {
+      state.token = '';
+    },
   },
 });
 
-export const { increment } = userSlice.actions;
+export const { increment, login, disconnect } = userSlice.actions;
 export default userSlice.reducer;

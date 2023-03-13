@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
+import HideIfLogged from './components/common/HideIfLoggin';
+import HideIfNotLogged from './components/common/HideIfNotLogged';
+import Navbar from './components/common/Navbar';
+import { login } from './features/userSlice';
+import Dashboard from './pages/Dashboard';
 
 function App() {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <HideIfLogged>
+        <span>NotLogged {user.value}</span>
+        <button onClick={() => dispatch(login())}>click</button>
+      </HideIfLogged>
+      <HideIfNotLogged>
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </>
+      </HideIfNotLogged>
+    </>
   );
 }
 

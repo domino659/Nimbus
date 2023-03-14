@@ -1,15 +1,17 @@
 FROM node:18-alpine
 
-WORKDIR /app
-
 ENV WATCHPACK_POLLING=true
 
-COPY package*.json ./
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+CMD ["npm", "start"]
 
-ENTRYPOINT ["npm", "start"]
+# do a serious build
+
+# docker-compose -f docker-compose.yml up -d --build

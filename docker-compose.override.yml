@@ -5,9 +5,17 @@ services:
     container_name: api_backend
     ports:
       - '4000:4000'
+    command: sh -c "npm i && npm run dev"
+    volumes:
+      - ./api:/app
 
   client:
     build: ./client
     container_name: client_frontend
     ports:
       - '3000:3000'
+    command: sh -c "npm i && npm start"
+    volumes:
+      - ./client:/app
+
+# docker compose up -d

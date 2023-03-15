@@ -10,7 +10,9 @@ services:
       - ./api:/app
 
   client:
-    build: ./client
+    build:
+      context: ./client
+      target: development
     container_name: client_frontend
     ports:
       - '3000:3000'
@@ -18,4 +20,4 @@ services:
     volumes:
       - ./client:/app
 
-# docker compose up -d
+# docker compose up -d --build

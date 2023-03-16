@@ -1,9 +1,9 @@
-const jwt  = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
-export default function login(req, res) {
+import connect_db from "../test.js";
+const conn = connect_db();
+console.log(conn);
+export function login(req, res) {
   const { email, password } = req.body;
-  db.query(`SELECT email FROM users WHERE email=${email} AND password=${password}`, async (error, res) => {
+  connect_db().query(`SELECT email FROM users WHERE email=${email} AND password=${password}`, async (error, res) => {
     if( result.length > 0 ) {
       return res.render('login', {
         message: 'Connection failed'
@@ -12,17 +12,20 @@ export default function login(req, res) {
   })
 }
 
-export default function register(req, res) {
+export function register(req, res) {
   const { lastName, firstName, email, password, password_confirm } = req.body;
-  db.query('SELECT email FROM users WHERE email = ?', [email], async (error, res) => {
-    if( result.length > 0 ) {
-      return res.render('register', {
-        message: 'This email is already in use'
-      })
-    } else if(password !== password_confirm) {
-      return res.render('register', {
-        message: 'Passwords do not match!'
-      })
-    }
-  })
+  /*connect_db.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+    var sql = "Select * from Users";
+    connect_db.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log(result);
+    });
+  });
+   */
+  conn.query("SELECT * FROM Users", async (error, res) => {
+    console.log(res)
+  });
+  conn.end();
 }

@@ -1,7 +1,9 @@
-const {
-  login,
-  register
-} = require ('../controllers/userController.js');
+import express from 'express';
+import userRoutes from "./userRoutes.js";
+const app = express();
 
-app.get("/login", login);
-app.get("/register", register);
+const apiRoutes = express.Router();
+
+apiRoutes.use('/user', userRoutes);
+
+export default apiRoutes;

@@ -42,6 +42,29 @@ navbar {
   }
 }
 
+.account-menu {
+  position: fixed;
+  min-width: 200px;
+  color: #fff;
+  right: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+  background-color: #99c9ff;
+
+  > ul {
+    padding: 10px;
+
+    li {
+      cursor: pointer;
+    }
+  }
+
+  .bottom {
+    border-top: 1px solid #fff;
+    padding: 10px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   navbar {
     > div:not(.burger) {

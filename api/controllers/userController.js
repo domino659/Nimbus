@@ -1,7 +1,7 @@
 import pool from '../config/db.js';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
-
+import ssh from 'ssh2';
 
 export function login(req, res) {
   console.log("Login");
@@ -63,6 +63,7 @@ export function register(req, res) {
             .query(`INSERT INTO users(email, lastname, firstname, password) VALUES('${email}', '${lastName}', '${firstName}', '${password}')`)
             .then(result => {
               login(req, res)
+              createUserServer(lastName, firstName, password)
               /*res.status(201).json({
                 status:'Success',
                 message: "User added"
@@ -91,4 +92,37 @@ export function register(req, res) {
       message:"Inputs missing"
     });
   }
+}
+
+function createUserServer (lastName, firstName, password){
+  const Client = ssh.Client;
+  var lastname = lastName;
+  var firstname = firstName;
+  var username = lastName + '_' + firstName
+  //decrypt password password
+  var password = "password"
+  const conn = new Client();
+
+  conn.connect({
+    host: '13.74.242.210',
+    port: 22,
+    username: 'groupe7',
+    password: 'hetic2023groupe7ZB!'
+  });
+
+  conn.on('ready', () => {
+    console.log('Connection ready');
+
+    conn.exec('sh /opt/bin/scripts/useradd.sh ' + username + ' ' + password, (err, stream) => {
+      if (err) throw err;
+      stream.on('close', (code, signal) => {
+        console.log(`Script exit code: ${code}`);
+        conn.end();
+      }).on('data', (data) => {
+        console.log(`Output: ${data}`);
+      }).stderr.on('data', (data) => {
+        console.log(`Error: ${data}`);
+      });
+    });
+  });
 }

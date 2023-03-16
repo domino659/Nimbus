@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
 
+RUN apk add --no-cache openssh
+
 RUN npm install
 
 COPY . .
@@ -19,6 +21,8 @@ RUN npm install -g nodemon
 WORKDIR /app
 
 COPY ["package.json", "package-lock.json*", "./"]
+
+RUN apk add --no-cache openssh
 
 RUN npm install
 

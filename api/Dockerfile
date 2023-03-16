@@ -1,4 +1,18 @@
-FROM node:18-alpine
+FROM node:18-alpine as development
+
+WORKDIR /app
+
+COPY ["package.json", "package-lock.json*", "./"]
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "start"]
+
+# # ------------------------------------------------------------------------
+
+FROM node:18-alpine as production
 
 RUN npm install -g nodemon
 
@@ -9,7 +23,5 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 
 COPY . .
-
-EXPOSE 4000
 
 CMD ["npm", "run", "dev"]

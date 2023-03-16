@@ -1,0 +1,82 @@
+@import './style.scss';
+
+.link-white {
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+}
+
+.link-white::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #fff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.link-white:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.auth-pages {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #99c9ff;
+
+  > form {
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+    max-width: 420px;
+    width: 100%;
+
+    > p {
+      align-self: self-start;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #fff;
+      border: 1px solid #c7c7c7;
+    }
+
+    button {
+      cursor: pointer;
+      padding: 8px 20px;
+      background-color: #3c87dc;
+      border-radius: 50px;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      transition-duration: 0.2s;
+    }
+
+    button:hover {
+      background-color: #156ed4;
+      scale: 0.95;
+    }
+  }
+}

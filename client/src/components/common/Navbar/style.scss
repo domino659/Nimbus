@@ -1,0 +1,55 @@
+navbar {
+  display: flex;
+  justify-content: space-between;
+  background: #99c9ff;
+  align-items: center;
+  padding: 5px 20px;
+
+  > img {
+    height: 50px;
+  }
+
+  > div:not(.burger) {
+    display: none;
+    gap: 20px;
+  }
+
+  ul {
+    display: flex;
+    gap: 20px;
+  }
+
+  a,
+  span {
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 40px;
+    height: 16px;
+    cursor: pointer;
+
+    > span {
+      background-color: #fff;
+      height: 2px;
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  navbar {
+    > div:not(.burger) {
+      display: flex;
+    }
+
+    .burger {
+      display: none;
+    }
+  }
+}

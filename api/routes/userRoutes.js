@@ -5,7 +5,7 @@ const app = express();
 const userRoutes = express.Router();
 
 //Auth
-userRoutes.get("/", login);
-userRoutes.post("/", register);
+userRoutes.post("/login", login);
+userRoutes.post("/register", register);
 
 export default userRoutes;

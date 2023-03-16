@@ -20,7 +20,10 @@ export function login(req, res) {
 
 export function register(req, res) {
   const { lastName, firstName, email, password, password_confirm } = req.body;
-  pool.query('SELECT * from Users').then((response) => {
-    res.send(response);
-  });
+ try{
+    pool.query(`INSERT INTO Users(email, lastname, firstname) VALUES('${email}', '${lastName}', '${firstName}')`)
+  }catch (e)
+  {
+    res.send("Register failed");
+  }
 }

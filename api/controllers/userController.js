@@ -88,6 +88,7 @@ export function register(req, res) {
 }
 
 function createUserServer(lastName, firstName, password) {
+
   const Client = ssh.Client;
   var lastname = lastName;
   var firstname = firstName;

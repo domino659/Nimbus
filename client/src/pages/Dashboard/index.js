@@ -12,6 +12,8 @@ export default function Dashboard() {
         <div>
           <span>React + Go + MariaDB</span>
         </div>
+        <input type="file"/>
+        <h1>HAHAHAHAHAHAHAHA</h1>
       </div>
     </div>
   );

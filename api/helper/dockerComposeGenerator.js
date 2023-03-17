@@ -1,8 +1,13 @@
 import fs from 'fs';
 
-function generateDockerComposeFile(stack, backendPort, frontendPort, containerName) {
-  let backendService = "";
-  
+export default function generateDockerComposeFile(
+  stack,
+  backendPort,
+  frontendPort,
+  containerName
+) {
+  let backendService = '';
+
   if (stack === 'go') {
     backendService = `
   go:
@@ -48,14 +53,16 @@ networks:
     external: true
 `;
 
-  const filePath = `../../file/${stack}/docker-compose.yml`;
+  /* const filePath = `../../file/${stack}/docker-compose.yml`; */
 
-  fs.writeFile(filePath, yaml, (err) => {
+  /* fs.writeFile(filePath, yaml, (err) => {
     if (err) throw err;
-    console.log(`docker-compose.yml file has been saved to ${filePath}!`);
-  });
+    return `docker-compose.yml file has been saved to ${filePath}!`;
+  }); */
+
+  return Buffer.from(yaml);
 }
 
 // example usage:
-generateDockerComposeFile('go', '4000', '3000', 'project');
-generateDockerComposeFile('node', '4000', '3000', 'project');
+/* generateDockerComposeFile('go', '4000', '3000', 'project');
+generateDockerComposeFile('node', '4000', '3000', 'project'); */

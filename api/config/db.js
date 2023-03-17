@@ -1,9 +1,9 @@
 import mariadb from 'mariadb';
 
 const pool = mariadb.createPool({
-  host: '127.0.0.1',
+  host: 'db-db-1',
   port: 3306,
-  user: 'testBen',
+  user: 'root',
   password: 'password',
   database: 'Nimbus',
 });

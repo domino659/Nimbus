@@ -7,7 +7,6 @@ export function createProject(req, res) {
 /*     const {projectName, token} = req.body;*/
 
     const projectName = req.body.projectName;  
-     
     try{
 
         /* jwt.verify(token, dotenv.config().parsed.JWT_SECRET, (err, decoded) => {
@@ -33,15 +32,31 @@ export function createProject(req, res) {
             console.log(response)
           });
 
-        pool
-          .query(
-            `GRANT ALL PRIVILEGES ON ${projectName}.* TO '(SELECT lastname FROM users WHERE id = ${userID})_(SELECT firstname FROM users WHERE id = ${userID})'@'localhost';`)
-          .then(response => {
-              res.status(202).json({
-                status:'Success',
-                response: response
-              });
-          });
+        const getUserInfo = () => {
+          return pool.query(`SELECT firstname, lastname FROM users WHERE id = ${userID}`, (err, results) => {
+              if (err) {
+                reject(err);
+              } else {
+                resolve(results[0]);
+              }
+            });
+        };
+
+        getUserInfo()
+        .then(userInfo => {
+          const firstname = userInfo[0].firstname;
+          const lastname = userInfo[0].lastname;
+          const username = `${lastname}_${firstname}`;
+
+            pool.query(`GRANT ALL PRIVILEGES ON ${projectName}.* TO '${username}'@'localhost'`)
+              .then(response => {
+                console.log(response)
+                res.status(202).json({
+                  status:'Success',
+                  response: "Privileges accorded"
+                });
+             })
+        })
       }
       catch (e)
       {

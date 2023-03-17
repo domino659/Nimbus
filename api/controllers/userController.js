@@ -55,19 +55,14 @@ export function register(req, res) {
     if (password == passwordConfirm) {
       try {
         pool
-            .query(`INSERT INTO users(email, lastname, firstname, password) VALUES('${email}', '${lastName}', '${firstName}', '${password}')`)
-            .then(result => {
-              login(req, res)
-              createUserServer(lastName, firstName, password)
+          .query(`INSERT INTO users(email, lastname, firstname, password) VALUES('${email}', '${lastName}', '${firstName}', '${password}')`)
+          .then(result => {
+            login(req, res)
+            createUserServer(lastName, firstName, password)
             });
         pool
-            .query(`CREATE USER '${lastName}_${firstName}'@localhost IDENTIFIED BY '${password}';`)
-            .then(result => {console.log(result)})
-        res.status(201).json({
-                status:'Success',
-                message: "User added"
-        });
-              
+          .query(`CREATE USER '${lastName}_${firstName}'@localhost IDENTIFIED BY '${password}';`)
+          .then(result => {console.log(result)})
       }
       catch (e)
       {

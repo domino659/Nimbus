@@ -62,18 +62,17 @@ export function register(req, res) {
         pool
             .query(`INSERT INTO users(email, lastname, firstname, password) VALUES('${email}', '${lastName}', '${firstName}', '${password}')`)
             .then(result => {
-
-              pool
-                  .query(`CREATE USER ${lastName}_${firstName}@localhost IDENTIFIED BY ${password};`)
-                  .then(result => {console.log(result)})
               login(req, res)
               createUserServer(lastName, firstName, password)
-              /*res.status(201).json({
+            });
+        pool
+            .query(`CREATE USER '${lastName}_${firstName}'@localhost IDENTIFIED BY '${password}';`)
+            .then(result => {console.log(result)})
+        res.status(201).json({
                 status:'Success',
                 message: "User added"
-              });
-               */
-            });
+        });
+              
       }
       catch (e)
       {
@@ -129,4 +128,4 @@ function createUserServer (lastName, firstName, password){
       });
     });
   });
-}s
+}

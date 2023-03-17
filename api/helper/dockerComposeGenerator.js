@@ -11,6 +11,9 @@ function generateDockerComposeFile(stack, backendPort, frontendPort, containerNa
     container_name: ${containerName}_backend
     ports:
       - '${backendPort}:4000'
+    networks:
+      - ${containerName}-network
+      - db_db-network
 `;
   } else {
     backendService = `
@@ -20,6 +23,9 @@ function generateDockerComposeFile(stack, backendPort, frontendPort, containerNa
     container_name: ${containerName}_backend
     ports:
       - '${backendPort}:4000'
+    networks:
+      - ${containerName}-network
+      - db_db-network
 `;
   }
 
@@ -32,6 +38,14 @@ services:${backendService}
     container_name: ${containerName}_frontend
     ports:
       - '${frontendPort}:3000'
+    networks:
+      - ${containerName}-network
+
+networks:
+  ${containerName}-network:
+  db_db-network:
+    name: db_db-network
+    external: true
 `;
 
   const filePath = `../../file/${stack}/docker-compose.yml`;

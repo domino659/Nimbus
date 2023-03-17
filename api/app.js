@@ -19,7 +19,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 app.listen(port, () =>
   console.log(`Server running on port ${port}, http://localhost:${port}`)

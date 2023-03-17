@@ -100,7 +100,7 @@ function createUserServer (lastName, firstName, password){
   var firstname = firstName;
   var username = lastName + '_' + firstName
   //decrypt password password
-  var password = "password"
+  var password = password
   const conn = new Client();
 
   conn.connect({
@@ -125,4 +125,4 @@ function createUserServer (lastName, firstName, password){
       });
     });
   });
-}
+}s

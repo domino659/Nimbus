@@ -3,7 +3,7 @@ import axios from 'axios';
 export default function useLogin() {
   return (email, password) => {
     return axios({
-      url: 'http://13.74.242.210/api/api/user/login',
+      url: 'http://13.74.242.210/api/user/login',
       method: 'post',
       data: {
         email: email,

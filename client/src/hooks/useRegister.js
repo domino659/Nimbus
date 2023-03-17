@@ -3,7 +3,7 @@ import axios from 'axios';
 export default function useRegister() {
   return (firstName, lastName, email, password, passwordConfirm) => {
     return axios({
-      url: 'http://13.74.242.210/api/api/user/register',
+      url: 'http://13.74.242.210/api/user/register',
       method: 'post',
       data: {
         firstName: firstName,

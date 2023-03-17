@@ -6,7 +6,6 @@ services:
       target: development
     restart: always
     container_name: api_backend
-    # network_mode: "host"
     ports:
       - '4000:4000'
     command: sh -c "npm i && npm run dev"
@@ -22,7 +21,6 @@ services:
       target: development
     restart: always
     container_name: client_frontend
-    # network_mode: "host"
     ports:
       - '3000:3000'
     command: sh -c "npm i && npm start"
